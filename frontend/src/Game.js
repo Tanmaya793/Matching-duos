@@ -1,13 +1,99 @@
-import "./Game.css";
+import React, { useEffect, useState } from "react";
+import Row from "./Row";
 
-function Game(){
-    return(
-        <>
-            <div className="field">
+const MatrixGrid = () => {
+  const [matrix, setMatrix] = useState([]);
+  const [revealed, setRevealed] = useState([]);
+  const [matched, setMatched] = useState([]);
+  const [time, setTime] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
-            </div>
-        </>
-    )
-}
+  useEffect(() => {
+    let interval = null;
+    if (!gameOver) {
+      interval = setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [gameOver]);
 
-export default Game;
+  useEffect(() => {
+    resetGame();
+  }, []);
+
+  const resetGame = () => {
+    const values = [];
+    for (let i = 1; i <= 8; i++) values.push(i, i);
+
+    for (let i = values.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [values[i], values[j]] = [values[j], values[i]];
+    }
+
+    const newMatrix = [];
+    for (let i = 0; i < 4; i++) {
+      newMatrix.push(values.slice(i * 4, i * 4 + 4));
+    }
+
+    setMatrix(newMatrix);
+    setRevealed([]);
+    setMatched([]);
+    setTime(0);
+    setGameOver(false);
+  };
+
+  const handleBoxClick = (row, col) => {
+    if (
+      revealed.some((r) => r.row === row && r.col === col) ||
+      matched.some((m) => m.row === row && m.col === col)
+    ) {
+      return;
+    }
+
+    const newRevealed = [...revealed, { row, col, value: matrix[row][col] }];
+    setRevealed(newRevealed);
+
+    if (newRevealed.length === 2) {
+      const [first, second] = newRevealed;
+
+      if (first.value === second.value) {
+        setMatched((prev) => [...prev, first, second]);
+        setRevealed([]);
+
+        if (matched.length + 2 === 16) {
+          setGameOver(true);
+        }
+      } else {
+        setTimeout(() => {
+          setRevealed([]);
+        }, 800);
+      }
+    }
+  };
+
+  const isRevealed = (row, col) =>
+    revealed.some((b) => b.row === row && b.col === col) ||
+    matched.some((b) => b.row === row && b.col === col);
+
+  return (
+    <div className="outer">
+      <h2>Time: {time}s</h2>
+      {gameOver && <h3>🎉 Game Over! Final Time: {time}s</h3>}
+      <button onClick={resetGame} style={{ marginBottom: "15px" }}>
+        🔁 Restart Game
+      </button>
+      {matrix.map((rowVals, rowIndex) => (
+        <Row
+          key={rowIndex}
+          row={rowIndex}
+          values={rowVals}
+          onBoxClick={handleBoxClick}
+          isRevealed={isRevealed}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default MatrixGrid;

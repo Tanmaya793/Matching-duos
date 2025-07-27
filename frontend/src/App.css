@@ -1,4 +1,46 @@
-.App {
-  text-align: center;
+body, html {
+  margin: 0;
+  height: 100%;
+}
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.row {
+  display: flex;
+  font-size: x-large;
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  background-color: #4CAF50;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: xx-large;
+  border-radius: 8px;
+}
+
+button {
+  padding: 8px 14px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #008cba;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  background-color: #006fa1;
 }
 
