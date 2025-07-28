@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
 
-const MatrixGrid = () => {
+const MatrixGrid = ({ onQuit }) => {
   const [matrix, setMatrix] = useState([]);
   const [revealed, setRevealed] = useState([]);
   const [matched, setMatched] = useState([]);
@@ -82,6 +82,9 @@ const MatrixGrid = () => {
       {gameOver && <h3>🎉 Game Over! Final Time: {time}s</h3>}
       <button onClick={resetGame} style={{ marginBottom: "15px" }} className="restart">
         🔁 Restart Game
+      </button>
+      <button className="restart" onClick={onQuit}>
+        Quit
       </button>
       {matrix.map((rowVals, rowIndex) => (
         <Row
