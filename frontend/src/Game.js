@@ -80,7 +80,7 @@ const MatrixGrid = () => {
     <div className="outer">
       <h2>Time: {time}s</h2>
       {gameOver && <h3>🎉 Game Over! Final Time: {time}s</h3>}
-      <button onClick={resetGame} style={{ marginBottom: "15px" }}>
+      <button onClick={resetGame} style={{ marginBottom: "15px" }} className="restart">
         🔁 Restart Game
       </button>
       {matrix.map((rowVals, rowIndex) => (
