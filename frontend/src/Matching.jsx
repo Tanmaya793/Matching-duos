@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
+import "./matrix.css";
 
 const MatrixGrid = ({ onQuit }) => {
   const [matrix, setMatrix] = useState([]);
@@ -77,15 +78,30 @@ const MatrixGrid = ({ onQuit }) => {
     matched.some((b) => b.row === row && b.col === col);
 
   return (
-    <div className="outer">
-      <h2>Time: {time}s</h2>
-      {gameOver && <h3>🎉 Game Over! Final Time: {time}s</h3>}
-      <button onClick={resetGame} style={{ marginBottom: "15px" }} className="restart">
+  <div className="outer matrix-container">
+    <h2 className="matrix-header">⏱ Time: {time}s</h2>
+
+    {gameOver && (
+      <h3 className="matrix-gameover">🎉 Game Over! Final Time: {time}s</h3>
+    )}
+
+    <div className="buttons-container">
+      <button 
+        onClick={resetGame} 
+        className="restart matrix-btn"
+      >
         🔁 Restart Game
       </button>
-      <button className="restart" onClick={onQuit}>
-        Quit
+
+      <button 
+        className="restart matrix-btn quit-btn" 
+        onClick={onQuit}
+      >
+        ❌ Quit
       </button>
+    </div>
+
+    <div className="grid-wrapper">
       {matrix.map((rowVals, rowIndex) => (
         <Row
           key={rowIndex}
@@ -96,7 +112,9 @@ const MatrixGrid = ({ onQuit }) => {
         />
       ))}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default MatrixGrid;

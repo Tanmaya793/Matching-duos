@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Box = ({ value, onClick, revealed }) => {
-
-  const [flipped, setFlipped] = useState(false);
-
   return (
-    <button
-      className={`box ${revealed ? "flipped" : ""}`}
-      onClick={onClick}
-      disabled={revealed}
-    >
-      <span className="box-front"></span>
-      <span className="box-back">{value}</span>
-    </button>
+    <div className="box-card">
+      <div
+        className={`box-inner ${revealed ? "flipped" : ""}`}
+        onClick={!revealed ? onClick : undefined}
+      >
+        <div className="box-front"></div>
+        <div className="box-back">{value}</div>
+      </div>
+    </div>
   );
 };
 
