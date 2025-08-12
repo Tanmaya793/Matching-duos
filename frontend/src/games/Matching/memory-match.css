@@ -1,0 +1,61 @@
+.matrix-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  background: radial-gradient(circle at 50% 25%, #0f2027 0%, #203a43 70%, #161b22 100%);
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 500px;
+  margin: auto;
+}
+
+.matrix-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.matrix-gameover {
+  font-size: 1.2rem;
+  color: #ffcd3c;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.matrix-btn {
+  background: #ff7f50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.matrix-btn:hover {
+  background: #ff5722;
+}
+
+.quit-btn {
+  background: #f44336;
+}
+
+.quit-btn:hover {
+  background: #d32f2f;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  gap: 10px;
+  justify-content: center;
+}

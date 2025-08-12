@@ -7,7 +7,7 @@ const winningCombinations = [
   [0, 4, 8], [2, 4, 6]
 ];
 
-export default function TicTacToe() {
+export default function TicTacToe({ onQuit }) {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
   const [winner, setWinner] = useState(null);
@@ -36,6 +36,7 @@ export default function TicTacToe() {
     if (result === bot) return 10 - depth;
     if (result === human) return depth - 10;
     if (checkDraw(newBoard)) return 0;
+
     if (isMaximizing) {
       let bestScore = -Infinity;
       for (let i = 0; i < 9; i++) {
@@ -64,6 +65,8 @@ export default function TicTacToe() {
   const botMove = () => {
     const now = Date.now();
     if (!gameStartTime) setGameStartTime(now);
+
+    // Try winning or blocking moves first
     for (let [a, b, c] of winningCombinations) {
       const line = [board[a], board[b], board[c]];
       if (line.filter(v => v === bot).length === 2 && line.includes(null)) {
@@ -86,6 +89,8 @@ export default function TicTacToe() {
         return;
       }
     }
+
+    // Minimax choice
     let possibleMoves = [];
     let bestScore = -Infinity;
     let bestMove = null;
@@ -101,6 +106,7 @@ export default function TicTacToe() {
         }
       }
     }
+
     let moveToPlay = bestMove;
     if (!hasMadeMistake && mistakeDelay !== null && now - gameStartTime >= mistakeDelay) {
       const nonBestMoves = possibleMoves.filter(m => m.index !== bestMove);
@@ -109,6 +115,7 @@ export default function TicTacToe() {
         setHasMadeMistake(true);
       }
     }
+
     if (moveToPlay !== null) {
       const newBoard = [...board];
       newBoard[moveToPlay] = bot;
@@ -157,21 +164,32 @@ export default function TicTacToe() {
     else if (level === "hard") setMistakeDelay(30000);
   };
 
+  // 🎯 Styled difficulty selection screen
   if (!difficulty) {
     return (
-      <div style={{ textAlign: "center" }}>
-        <h1>Choose Difficulty</h1>
-        <button onClick={() => startGameWithDifficulty("easy")}>Easy</button>
-        <button onClick={() => startGameWithDifficulty("medium")}>Medium</button>
-        <button onClick={() => startGameWithDifficulty("hard")}>Hard</button>
-      </div>
-    );
-  }
+        <div className="tic-tac-toe">
+            <button className="back-to-hub-btn" onClick={onQuit}>
+                ← Back to Home
+            </button>
+            <div className="difficulty-select">
+                <h1>Choose Difficulty ⚙️</h1>
+                <button onClick={() => startGameWithDifficulty("easy")}>Easy 🐣</button>
+                <button onClick={() => startGameWithDifficulty("medium")}>Medium 🎯</button>
+                <button onClick={() => startGameWithDifficulty("hard")}>Hard 💀</button>
+             </div>
+        </div>
+        );
+    }
 
+  // 🎯 Game board screen
   return (
     <div className="tic-tac-toe">
+        <button className="back-to-hub-btn" onClick={onQuit}>
+            ← Back to Home
+        </button>
         <div className="container">
-        <h1>Tic Tac Toe ({difficulty.toUpperCase()} Mode)</h1>
+        
+        <h1>TTT-bot ({difficulty.toUpperCase()} Mode)</h1>
         <div className="board">
             {board.map((cell, idx) => (
             <button
@@ -189,12 +207,11 @@ export default function TicTacToe() {
         </div>
         {(winner || isDraw) && (
             <div>
-            <button onClick={restartGame}>Restart</button>
-            <button onClick={() => setDifficulty(null)}>Change Difficulty</button>
+            <button className="restart-btn" onClick={restartGame}>Restart</button>
+            <button className="change-btn" onClick={() => setDifficulty(null)}>Change Difficulty</button>
             </div>
         )}
         </div>
     </div>
-
     );
 }
