@@ -31,7 +31,7 @@ export default function TicTacToe({ onQuit }) {
 
   const checkDraw = (board) => board.every(cell => cell !== null);
 
-  const minimax = (newBoard, depth, isMaximizing) => {
+  const minimax = useCallback((newBoard, depth, isMaximizing) => {
     let result = checkWinner(newBoard);
     if (result === bot) return 10 - depth;
     if (result === human) return depth - 10;
@@ -60,7 +60,8 @@ export default function TicTacToe({ onQuit }) {
       }
       return bestScore;
     }
-  };
+  }, [bot, human, checkWinner, checkDraw]);
+
 
   const botMove = useCallback(() => {
     const now = Date.now();
@@ -120,7 +121,7 @@ export default function TicTacToe({ onQuit }) {
       setBoard(newBoard);
       setIsPlayerTurn(true);
     }
-  }, [board, bot, human, hasMadeMistake, mistakeDelay, gameStartTime]);
+  }, [board, bot, human, hasMadeMistake, mistakeDelay, gameStartTime, minimax]);
 
   const handleClick = (index) => {
     if (!isPlayerTurn || board[index] || winner) return;
