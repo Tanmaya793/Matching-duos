@@ -1,4 +1,4 @@
-/* Background for the whole page */
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -9,7 +9,6 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Main game container with glassmorphism */
 .matrix-container {
   backdrop-filter: blur(12px) saturate(120%);
   -webkit-backdrop-filter: blur(12px) saturate(120%);
@@ -24,7 +23,6 @@ body {
   text-align: center;
 }
 
-/* Header (timer and gameover) */
 .matrix-header {
   font-size: 1.5rem;
   font-weight: 600;
@@ -38,7 +36,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* Buttons container */
 .buttons-container {
   display: flex;
   gap: 10px;
@@ -46,7 +43,6 @@ body {
   margin-bottom: 15px;
 }
 
-/* Buttons styling */
 .matrix-btn {
   background: #ff7f50;
   color: white;
@@ -74,7 +70,6 @@ body {
   box-shadow: 0 3px 15px rgba(211, 47, 47, 0.7);
 }
 
-/* Grid row alignment */
 .row {
   display: flex;
   justify-content: center;
@@ -82,12 +77,10 @@ body {
   margin-bottom: 10px;
 }
 
-/* Perspective container for flip cards */
 .box-card {
   perspective: 700px;
 }
 
-/* Flip card styling */
 .box-inner {
   width: 64px;
   height: 64px;
@@ -112,7 +105,6 @@ body {
   filter: brightness(0.95);
 }
 
-/* Card faces */
 .box-front, .box-back {
   position: absolute;
   top: 0; left: 0;
@@ -129,20 +121,17 @@ body {
   box-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 
-/* Front face (hidden side) */
 .box-front {
   background: linear-gradient(135deg, #34495e 0%, #22313f 100%);
   border: 2px solid #70a1ff44;
 }
 
-/* Back face (revealed value) */
 .box-back {
   background: linear-gradient(135deg, #ffa502 0%, #ff6348 100%);
   border: 2px solid #70a1ffcc;
   transform: rotateY(180deg);
 }
 
-/* Focus style for accessibility */
 .box-inner:focus {
   box-shadow: 0 0 0 4px #70a1ff88;
 }

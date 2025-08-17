@@ -11,7 +11,7 @@ function TicTacToeStart({ onBack, onStart }) {
         
 
         <div className="game-intro">
-          <div className="game-icon">❌⭕</div>  {/* You can customize icon */}
+          <div className="game-icon">❌⭕</div> 
           <h1 className="game-title">Tic Tac Toe</h1>
           <p className="game-subtitle">
             The classic game of Xs and Os! Beat your opponent.

@@ -1,15 +1,13 @@
-/* Fullscreen game background */
+
 .tic-tac-toe {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;       /* optional small padding inside parent background */
-  background: transparent; /* Let parent background show */
-  min-height: auto;    /* Don’t force full screen height */
+  padding: 20px;    
+  background: transparent; 
+  min-height: auto;    
 }
 
-
-/* Glassmorphic game container */
 .tic-tac-toe .container {
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
@@ -31,7 +29,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Title */
 .tic-tac-toe h1 {
   margin-bottom: 24px;
   letter-spacing: 2px;
@@ -42,7 +39,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Board layout */
 .tic-tac-toe .board {
   display: grid;
   grid-template-columns: repeat(3, 90px);
@@ -50,7 +46,6 @@
   margin-bottom: 20px;
 }
 
-/* Tile styling */
 .tic-tac-toe .square {
   width: 90px;
   height: 90px;
@@ -78,7 +73,6 @@
   cursor: default;
 }
 
-/* Winner message */
 .tic-tac-toe .message {
   font-size: 1.3rem;
   margin: 16px 0 12px 0;
@@ -94,7 +88,6 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Buttons */
 .tic-tac-toe .btn,
 .tic-tac-toe .difficulty-select button {
   margin: 8px;
@@ -118,7 +111,6 @@
   transform: translateY(-2px);
 }
 
-/* Difficulty select layout */
 .difficulty-select {
   display: flex;
   flex-direction: column;
@@ -164,8 +156,6 @@
   transform: scale(1.05);
 }
 
-
-/* Responsive */
 @media (max-width: 500px) {
   .tic-tac-toe .board {
     grid-template-columns: repeat(3, 70px);
@@ -198,7 +188,6 @@
   background: rgba(255,255,255,0.3);
 }
 
-/* Container for end-game buttons */
 .end-game-buttons {
   display: flex;
   gap: 12px;
@@ -207,7 +196,6 @@
   margin-top: 16px;
 }
 
-/* Base button style */
 .end-game-buttons button {
   min-width: 140px;
   padding: 10px 20px;
@@ -221,7 +209,6 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Restart - green gradient */
 button.restart-btn {
   background: linear-gradient(135deg, #4caf50, #81c784);
 }
@@ -231,7 +218,6 @@ button.restart-btn:hover {
   transform: translateY(-2px);
 }
 
-/* Change Difficulty - amber/orange */
 button.change-btn {
   background: linear-gradient(135deg, #ff9800, #ffb74d);
 }
@@ -241,7 +227,6 @@ button.change-btn:hover {
   transform: translateY(-2px);
 }
 
-/* Back to Home - red */
 button.back-btn {
   background: linear-gradient(135deg, #e53935, #ef5350);
 }
@@ -251,7 +236,6 @@ button.back-btn:hover {
   transform: translateY(-2px);
 }
 
-/* Mobile: stack buttons */
 @media (max-width: 480px) {
   .end-game-buttons {
     flex-direction: column;

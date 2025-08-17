@@ -20,12 +20,10 @@ function App() {
     setStarted(false);
   };
 
-  // HUB
   if (!selectedGame) {
     return <GameHub onSelectGame={setSelectedGame} />;
   }
 
-  // START SCREEN
   if (!started) {
     if (selectedGame === "memory") {
       return <MemoryMatchStart onBack={backToHub} onStart={() => setStarted(true)} />;
@@ -35,7 +33,6 @@ function App() {
     }
   }
 
-  // GAME SCREEN
   if (started) {
     if (selectedGame === "memory") {
       return <MemoryMatchGame onQuit={quitGame} />;

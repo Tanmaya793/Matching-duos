@@ -66,7 +66,6 @@ export default function TicTacToe({ onQuit }) {
     const now = Date.now();
     if (!gameStartTime) setGameStartTime(now);
 
-    // Try winning or blocking moves first
     for (let [a, b, c] of winningCombinations) {
       const line = [board[a], board[b], board[c]];
       if (line.filter(v => v === bot).length === 2 && line.includes(null)) {
@@ -90,7 +89,6 @@ export default function TicTacToe({ onQuit }) {
       }
     }
 
-    // Minimax choice
     let possibleMoves = [];
     let bestScore = -Infinity;
     let bestMove = null;
@@ -164,7 +162,6 @@ export default function TicTacToe({ onQuit }) {
     else if (level === "hard") setMistakeDelay(30000);
   };
 
-  // 🎯 Styled difficulty selection screen
   if (!difficulty) {
     return (
         <div className="tic-tac-toe">
@@ -181,7 +178,6 @@ export default function TicTacToe({ onQuit }) {
         );
     }
 
-  // 🎯 Game board screen
   return (
     <div className="tic-tac-toe">
         <button className="back-to-hub-btn" onClick={onQuit}>
