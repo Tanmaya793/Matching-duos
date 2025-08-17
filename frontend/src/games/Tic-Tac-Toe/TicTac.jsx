@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import './TicTac.css';
 
 const winningCombinations = [
@@ -62,7 +62,7 @@ export default function TicTacToe({ onQuit }) {
     }
   };
 
-  const botMove = () => {
+  const botMove = useCallback(() => {
     const now = Date.now();
     if (!gameStartTime) setGameStartTime(now);
 
@@ -120,7 +120,7 @@ export default function TicTacToe({ onQuit }) {
       setBoard(newBoard);
       setIsPlayerTurn(true);
     }
-  };
+  }, [board, bot, human, hasMadeMistake, mistakeDelay, gameStartTime]);
 
   const handleClick = (index) => {
     if (!isPlayerTurn || board[index] || winner) return;
@@ -164,50 +164,49 @@ export default function TicTacToe({ onQuit }) {
 
   if (!difficulty) {
     return (
-        <div className="tic-tac-toe">
-            <button className="back-to-hub-btn" onClick={onQuit}>
-                ← Back to Home
-            </button>
-            <div className="difficulty-select">
-                <h1>Choose Difficulty ⚙️</h1>
-                <button onClick={() => startGameWithDifficulty("easy")}>Easy 🐣</button>
-                <button onClick={() => startGameWithDifficulty("medium")}>Medium 🎯</button>
-                <button onClick={() => startGameWithDifficulty("hard")}>Hard 💀</button>
-             </div>
+      <div className="tic-tac-toe">
+        <button className="back-to-hub-btn" onClick={onQuit}>
+          ← Back to Home
+        </button>
+        <div className="difficulty-select">
+          <h1>Choose Difficulty ⚙️</h1>
+          <button onClick={() => startGameWithDifficulty("easy")}>Easy 🐣</button>
+          <button onClick={() => startGameWithDifficulty("medium")}>Medium 🎯</button>
+          <button onClick={() => startGameWithDifficulty("hard")}>Hard 💀</button>
         </div>
-        );
-    }
+      </div>
+    );
+  }
 
   return (
     <div className="tic-tac-toe">
-        <button className="back-to-hub-btn" onClick={onQuit}>
-            ← Back to Home
-        </button>
-        <div className="container">
-        
+      <button className="back-to-hub-btn" onClick={onQuit}>
+        ← Back to Home
+      </button>
+      <div className="container">
         <h1>TTT-bot ({difficulty.toUpperCase()} Mode)</h1>
         <div className="board">
-            {board.map((cell, idx) => (
+          {board.map((cell, idx) => (
             <button
-                key={idx}
-                onClick={() => handleClick(idx)}
-                className="square"
-                disabled={!!cell || !!winner}
+              key={idx}
+              onClick={() => handleClick(idx)}
+              className="square"
+              disabled={!!cell || !!winner}
             >
-                {cell}
+              {cell}
             </button>
-            ))}
+          ))}
         </div>
         <div className="message">
-            {winner ? `${winner} wins!` : isDraw ? "It's a draw!" : ""}
+          {winner ? `${winner} wins!` : isDraw ? "It's a draw!" : ""}
         </div>
         {(winner || isDraw) && (
-            <div>
+          <div>
             <button className="restart-btn" onClick={restartGame}>Restart</button>
             <button className="change-btn" onClick={() => setDifficulty(null)}>Change Difficulty</button>
-            </div>
+          </div>
         )}
-        </div>
+      </div>
     </div>
-    );
+  );
 }
