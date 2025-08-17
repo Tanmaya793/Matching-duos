@@ -144,7 +144,7 @@ export default function TicTacToe({ onQuit }) {
       const timer = setTimeout(botMove, 500);
       return () => clearTimeout(timer);
     }
-  }, [board, isPlayerTurn]);
+  }, [board, isPlayerTurn, botMove]);
 
   const restartGame = () => {
     setBoard(Array(9).fill(null));
