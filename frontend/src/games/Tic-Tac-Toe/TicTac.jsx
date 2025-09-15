@@ -20,16 +20,17 @@ export default function TicTacToe({ onQuit }) {
   const human = "X";
   const bot = "O";
 
-  const checkWinner = (board) => {
-    for (let [a, b, c] of winningCombinations) {
-      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        return board[a];
-      }
+  const checkWinner = useCallback((board) => {
+  for (let [a, b, c] of winningCombinations) {
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
     }
-    return null;
-  };
+  }
+  return null;
+}, []);
 
-  const checkDraw = (board) => board.every(cell => cell !== null);
+const checkDraw = useCallback((board) => board.every(cell => cell !== null), []);
+
 
   const minimax = useCallback((newBoard, depth, isMaximizing) => {
     let result = checkWinner(newBoard);
