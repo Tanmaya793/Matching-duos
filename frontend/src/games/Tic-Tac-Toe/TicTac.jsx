@@ -146,7 +146,7 @@ const checkDraw = useCallback((board) => board.every(cell => cell !== null), [])
       const timer = setTimeout(botMove, 500);
       return () => clearTimeout(timer);
     }
-  }, [board, isPlayerTurn, botMove]);
+  }, [board, isPlayerTurn, botMove, checkDraw, checkWinner]);
 
   const restartGame = () => {
     setBoard(Array(9).fill(null));
